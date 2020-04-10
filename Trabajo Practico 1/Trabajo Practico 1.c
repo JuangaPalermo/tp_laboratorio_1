@@ -33,15 +33,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-int menu (void);
-float solicitudNumero (void);
-float suma (float primerNumero, float segundoNumero);
-float resta (float primerNumero, float segundoNumero);
-float multiplicacion (float primerNumero, float segundoNumero);
-float division (float primerNumero, float segundoNumero);
-
-
+#include "micalculadora.h"
 
 int main(void) {
 
@@ -52,7 +44,8 @@ int main(void) {
 	float resultadoResta;
 	float resultadoMultiplicacion;
 	float resultadoDivision;
-
+	long long int resultadoFactorialPrimero;
+	long long int resultadoFactorialSegundo;
 
 	do
 	{
@@ -76,8 +69,9 @@ int main(void) {
     			resultadoResta = resta(numero1, numero2);
     			resultadoMultiplicacion = multiplicacion(numero1, numero2);
     			resultadoDivision = division(numero1, numero2);
-    			//resultadoFactorialPrimero = factorial(numero1);
-    			//resultadoFactorialSegundo = factorial(numero2);
+    			resultadoFactorialPrimero = factorial(numero1);
+    			resultadoFactorialSegundo = factorial(numero2);
+    			printf("\nSe han calculado todas las operaciones!\n");
     			break;
     		}
     		case 4:
@@ -85,7 +79,45 @@ int main(void) {
     			printf("\nEl resultado de %f mas %f es: %f\n", numero1, numero2, resultadoSuma);
     			printf("El resultado de %f menos %f es: %f\n", numero1, numero2, resultadoResta);
     			printf("El resultado de %f por %f es: %f\n", numero1, numero2, resultadoMultiplicacion);
-    			printf("El resultado de %f dividido %f es: %f\n", numero1, numero2, resultadoDivision);
+    			if (resultadoDivision == 0)
+    			{
+    				printf("No se puede dividir por cero!\n");
+    			}
+    			else
+    			{
+    				printf("El resultado de %f dividido %f es: %f\n", numero1, numero2, resultadoDivision);
+    			}
+    			if (resultadoFactorialPrimero == 0)
+    			{
+    				printf("No se puede calcular el factorial de los decimales!\n");
+    			}
+    			else
+    			{
+    			    if (resultadoFactorialPrimero == -1)
+    			    {
+    			        printf("No se puede calcular el factorial de los negativos!\n");
+    			    }
+    			    else
+    			    {
+    			        printf ("El factorial de %f es: %llu\n", numero1, resultadoFactorialPrimero);
+    			    }
+
+    			}
+    			if (resultadoFactorialSegundo == 0)
+				{
+					printf("No se puede calcular el factorial de los decimales!\n");
+				}
+				else
+				{
+				    if (resultadoFactorialSegundo == -1)
+				    {
+				        printf("NO se puede calcular el factorial de los negativos!\n");
+				    }
+				    else
+				    {
+				        printf ("El factorial de %f es: %llu\n", numero2, resultadoFactorialSegundo);
+				    }
+				}
     			break;
     		}
     		case 5:
@@ -97,69 +129,5 @@ int main(void) {
 	return EXIT_SUCCESS;
 }
 
-int menu (void)
-{
-	int opcion;
 
-	printf("1. Ingresar primer operando\n");
-	printf("2. Ingresar segundo operando\n");
-	printf("3. Calcular operaciones (suma, resta, producto, division y factorial)\n");
-	printf("4. Informar resultados de las operaciones\n");
-	printf("5. Salir\n");
-	printf("Seleccione la opcion que desee: ");
-	scanf("%d", &opcion);
-
-	return opcion;
-}
-
-float solicitudNumero (void)
-{
-	float numero;
-
-	printf("\nIngrese el numero que desea: ");
-	scanf("%f", &numero);
-
-	return numero;
-}
-
-float suma (float primerNumero, float segundoNumero)
-{
-	float resultadoSuma;
-
-	resultadoSuma = primerNumero + segundoNumero;
-
-	return resultadoSuma;
-}
-
-float resta (float primerNumero, float segundoNumero)
-{
-	float resultadoResta;
-
-	resultadoResta = primerNumero - segundoNumero;
-
-	return resultadoResta;
-}
-
-float multiplicacion (float primerNumero, float segundoNumero)
-{
-	float resultadoMultiplicacion;
-
-	resultadoMultiplicacion = primerNumero * segundoNumero;
-
-	return resultadoMultiplicacion;
-}
-
-float division (float primerNumero, float segundoNumero)
-{
-	float resultadoDivision;
-
-	while (segundoNumero == 0){
-		printf("El divisor no puede ser 0, por favor, reingrese un numero: ");
-		scanf("%f", &segundoNumero);
-	}
-
-	resultadoDivision = primerNumero / segundoNumero;
-
-	return resultadoDivision;
-}
 
