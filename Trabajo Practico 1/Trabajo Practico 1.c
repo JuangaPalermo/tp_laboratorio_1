@@ -36,14 +36,22 @@
 
 int menu (void);
 float solicitudNumero (void);
+float suma (float primerNumero, float segundoNumero);
+float resta (float primerNumero, float segundoNumero);
+float multiplicacion (float primerNumero, float segundoNumero);
+float division (float primerNumero, float segundoNumero);
+
+
 
 int main(void) {
 
 	int opcionElegida;
-
-	int numero1;
-	int numero2;
-	int suma;
+	float numero1;
+	float numero2;
+	float resultadoSuma;
+	float resultadoResta;
+	float resultadoMultiplicacion;
+	float resultadoDivision;
 
 
 	do
@@ -53,22 +61,38 @@ int main(void) {
     	switch (opcionElegida)
     	{
     		case 1:
+    		{
     			numero1 = solicitudNumero();
     			break;
-
+    		}
     		case 2:
+    		{
     			numero2 = solicitudNumero();
     			break;
+    		}
     		case 3:
-    			suma = numero1 + numero2;
+    		{
+    			resultadoSuma = suma(numero1, numero2);
+    			resultadoResta = resta(numero1, numero2);
+    			resultadoMultiplicacion = multiplicacion(numero1, numero2);
+    			resultadoDivision = division(numero1, numero2);
+    			//resultadoFactorialPrimero = factorial(numero1);
+    			//resultadoFactorialSegundo = factorial(numero2);
     			break;
+    		}
+    		case 4:
+    		{
+    			printf("\nEl resultado de %f mas %f es: %f\n", numero1, numero2, resultadoSuma);
+    			printf("El resultado de %f menos %f es: %f\n", numero1, numero2, resultadoResta);
+    			printf("El resultado de %f por %f es: %f\n", numero1, numero2, resultadoMultiplicacion);
+    			printf("El resultado de %f dividido %f es: %f\n", numero1, numero2, resultadoDivision);
+    			break;
+    		}
     		case 5:
+    			printf("\nMuchas gracias por usar este programa!");
     			break;
     	}
 	} while (opcionElegida != 5);
-
-	printf("La suma de %d mas %d es: %d", numero1, numero2, suma);
-
 
 	return EXIT_SUCCESS;
 }
@@ -97,3 +121,45 @@ float solicitudNumero (void)
 
 	return numero;
 }
+
+float suma (float primerNumero, float segundoNumero)
+{
+	float resultadoSuma;
+
+	resultadoSuma = primerNumero + segundoNumero;
+
+	return resultadoSuma;
+}
+
+float resta (float primerNumero, float segundoNumero)
+{
+	float resultadoResta;
+
+	resultadoResta = primerNumero - segundoNumero;
+
+	return resultadoResta;
+}
+
+float multiplicacion (float primerNumero, float segundoNumero)
+{
+	float resultadoMultiplicacion;
+
+	resultadoMultiplicacion = primerNumero * segundoNumero;
+
+	return resultadoMultiplicacion;
+}
+
+float division (float primerNumero, float segundoNumero)
+{
+	float resultadoDivision;
+
+	while (segundoNumero == 0){
+		printf("El divisor no puede ser 0, por favor, reingrese un numero: ");
+		scanf("%f", &segundoNumero);
+	}
+
+	resultadoDivision = primerNumero / segundoNumero;
+
+	return resultadoDivision;
+}
+
