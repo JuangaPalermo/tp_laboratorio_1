@@ -35,11 +35,12 @@
 #include <stdlib.h>
 #include "micalculadora.h"
 
+
 int main(void) {
 
 	int opcionElegida;
-	float numero1;
-	float numero2;
+	float numero1 = 0;
+	float numero2 = 0;
 	float resultadoSuma;
 	float resultadoResta;
 	float resultadoMultiplicacion;
@@ -47,9 +48,10 @@ int main(void) {
 	long long int resultadoFactorialPrimero;
 	long long int resultadoFactorialSegundo;
 
+
 	do
 	{
-	    opcionElegida = menu();
+	    opcionElegida = menu(numero1, numero2);
 
     	switch (opcionElegida)
     	{
@@ -61,7 +63,7 @@ int main(void) {
     		case 2:
     		{
     			numero2 = solicitudNumero();
-    			break;
+				break;
     		}
     		case 3:
     		{
@@ -76,17 +78,19 @@ int main(void) {
     		}
     		case 4:
     		{
-    			printf("\nEl resultado de %f mas %f es: %f\n", numero1, numero2, resultadoSuma);
-    			printf("El resultado de %f menos %f es: %f\n", numero1, numero2, resultadoResta);
-    			printf("El resultado de %f por %f es: %f\n", numero1, numero2, resultadoMultiplicacion);
+    			printf("\nEl resultado de %g mas %g es: %g\n", numero1, numero2, resultadoSuma);
+    			printf("El resultado de %g menos %g es: %g\n", numero1, numero2, resultadoResta);
+    			printf("El resultado de %g por %g es: %g\n", numero1, numero2, resultadoMultiplicacion);
+
     			if (resultadoDivision == 0)
     			{
     				printf("No se puede dividir por cero!\n");
     			}
     			else
     			{
-    				printf("El resultado de %f dividido %f es: %f\n", numero1, numero2, resultadoDivision);
+    				printf("El resultado de %g dividido %g es: %g\n", numero1, numero2, resultadoDivision);
     			}
+
     			if (resultadoFactorialPrimero == 0)
     			{
     				printf("No se puede calcular el factorial de los decimales!\n");
@@ -99,10 +103,19 @@ int main(void) {
     			    }
     			    else
     			    {
-    			        printf ("El factorial de %f es: %llu\n", numero1, resultadoFactorialPrimero);
+    			    	if(resultadoFactorialPrimero == -2)
+    			    	{
+    			    		printf("El numero %g es muy grande para calcular el factorial en esta aplicacion.\n", numero1);
+    			    	}
+    			    	else
+    			    	{
+    			    		printf("El factorial de %g es: %llu\n", numero1, resultadoFactorialPrimero);
+    			    	}
+
     			    }
 
     			}
+
     			if (resultadoFactorialSegundo == 0)
 				{
 					printf("No se puede calcular el factorial de los decimales!\n");
@@ -111,19 +124,30 @@ int main(void) {
 				{
 				    if (resultadoFactorialSegundo == -1)
 				    {
-				        printf("NO se puede calcular el factorial de los negativos!\n");
+				        printf("No se puede calcular el factorial de los negativos!\n");
 				    }
 				    else
-				    {
-				        printf ("El factorial de %f es: %llu\n", numero2, resultadoFactorialSegundo);
-				    }
+					{
+						if(resultadoFactorialSegundo == -2)
+						{
+							printf("El numero %g es muy grande para calcular el factorial en esta aplicacion.\n", numero2);
+						}
+						else
+						{
+							printf("El factorial de %g es: %llu\n", numero2, resultadoFactorialSegundo);
+						}
+
+					}
 				}
     			break;
     		}
     		case 5:
+    		{
     			printf("\nMuchas gracias por usar este programa!");
     			break;
+    		}
     	}
+
 	} while (opcionElegida != 5);
 
 	return EXIT_SUCCESS;

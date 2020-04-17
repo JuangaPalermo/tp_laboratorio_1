@@ -1,9 +1,13 @@
 /* Brief: Funcion menu, que pide un numero de las opciones y lo devuleve al main
  *
+ * param: float - Recibe el primer numero ingresado por el usuario (o en su defecto, 0)
+ *
+ * param: float - Recibe el segundo numero ingresado por el usuario (o en su defecto, 0)
+ *
  * return: Int - Validado entre las opciones impresas.
  */
 
-int menu (void);
+int menu (float numero1, float numero2);
 
 
 /* Brief: Solicita un numero al usuario
@@ -65,7 +69,7 @@ float division (float primerNumero, float segundoNumero);
  * param: float - Recibe el primer numero ingresado por el usuario
  *
  * return: float - El factorial del numero ingresado. Si es negativo devuelve -1. Si es decimal devuelve 0.
+ * 				   si es mayor a lo maximo que se puede calcular, devuelve -2
  */
 
 long long int factorial (float numero);
-

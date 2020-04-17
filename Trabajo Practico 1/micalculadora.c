@@ -1,12 +1,12 @@
 #include "micalculadora.h"
 #include <stdio.h>
 
-int menu (void)
+int menu (float numero1, float numero2)
 {
 	int opcion;
 
-	printf("\n1. Ingresar primer operando\n");
-	printf("2. Ingresar segundo operando\n");
+	printf("\n1. Ingresar primer operando, (actualmente A = %g):\n", numero1);
+	printf("2. Ingresar segundo operando, (actualmente B = %g):\n", numero2);
 	printf("3. Calcular operaciones (suma, resta, producto, division y factorial)\n");
 	printf("4. Informar resultados de las operaciones\n");
 	printf("5. Salir\n");
@@ -95,14 +95,21 @@ long long int factorial (float numero)
 	    }
 	    else
 	    {
-    	    resultadoFactorial = 1;
+	    	if (numero > 20)
+	    	{
+	    		resultadoFactorial = -2;
+	    	}
+	    	else
+	    	{
+	    		resultadoFactorial = 1;
 
-    	    for (numero; numero > 1; numero--)
-    			{
-    				resultadoFactorial *= numero;
-    			}
+				for (numero; numero > 1; numero--)
+					{
+						resultadoFactorial *= numero;
+					}
+	    	}
+
     		return resultadoFactorial;
 	    }
 	}
 }
-
