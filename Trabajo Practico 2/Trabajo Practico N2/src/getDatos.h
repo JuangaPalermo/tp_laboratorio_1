@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdio_ext.h>
+#include <string.h>
+
 /*brief: pide al usuario que ingrese un entero, lo valida, y lo devuelve
  *
  *param char mensaje[]: Mensaje al usuario pidiendole el int
@@ -27,12 +31,5 @@ float getFloat(int primerValor, int segundoValor);
  */
 void getString (char mensaje[], char texto[], int largo);
 
-/*brief: Recibe un array y lo recorre
- *
- *param Employee listado[]: array a recorrer
- *param int tam: tamaño del array a recorrer
- *
- *return int: si encuentra un elemento vacio, devuelve el indice. Si no, devuelve -1.
- */
-int buscarLibre(Employee listado[], int tam);
+
 

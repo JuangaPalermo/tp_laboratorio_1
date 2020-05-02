@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdio_ext.h>
 #include "getDatos.h"
-#include <string.h>
-#include "ArrayEmployees.h"
 
 
 int getInt (char mensaje[], char error[], int min, int max)
@@ -36,18 +32,5 @@ void getString (char mensaje[], char texto[], int largo)
     texto[strlen(texto)-1]='\0';
 }
 
-int buscarLibre(Employee listado[], int tam)
-{
-    int i;
-    int index = -1;
-    for(i=0; i<tam; i++)
-    {
-        if(listado[i].isEmpty == 0)
-        {
-            index = i;
-            break;
-        }
-    }
-    return index;
-}
+
 
