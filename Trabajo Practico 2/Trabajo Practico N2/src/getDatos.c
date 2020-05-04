@@ -18,7 +18,7 @@ int getInt (char mensaje[], char error[], int min, int max)
 }
 
 
-float getFloat(int primerValor, int segundoValor)
+float getPromedio(int primerValor, int segundoValor)
 {
     return ((float) primerValor + segundoValor) / 2;
 }
@@ -30,6 +30,19 @@ void getString (char mensaje[], char texto[], int largo)
     __fpurge(stdin);
     fgets(texto, largo, stdin);
     texto[strlen(texto)-1]='\0';
+}
+
+float getFloat(char mensaje[], char error[])
+{
+	float returnValue;
+	float numeroCargado;
+
+	printf("%s", mensaje);
+	scanf("%f", &numeroCargado);
+
+	returnValue = numeroCargado;
+
+	return returnValue;
 }
 
 

@@ -20,7 +20,7 @@ int getInt (char mensaje[], char error[], int min, int max);
  *
  *return: float obtenido de dividir la suma de los dos numeros
  */
-float getFloat(int primerValor, int segundoValor);
+float getPromedio(int primerValor, int segundoValor);
 
 /*brief: pide un string y lo carga en la direccion indicada
  *
@@ -31,5 +31,4 @@ float getFloat(int primerValor, int segundoValor);
  */
 void getString (char mensaje[], char texto[], int largo);
 
-
-
+float getFloat(char mensaje[], char error[]);

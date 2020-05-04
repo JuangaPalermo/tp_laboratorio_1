@@ -45,6 +45,8 @@ int newEmployee (Employee list[], int len);
  * */
 int findEmployeeById(Employee list[], int len, int id);
 
+int modifyEmployee(Employee list[], int len, int id);
+
 
 /* \brief Remove a Employee by Id (put isEmpty Flag in EMPTY)
  *
@@ -55,6 +57,27 @@ int findEmployeeById(Employee list[], int len, int id);
  * return Return (-1) if error or (0) if OK
  * */
 int removeEmployee(Employee list [], int len, int id);
+
+/* \brief Sort the elements in the array of employees, the argument order
+ * indicates UP or DOWN
+ *
+ * \param Employee list[]: array to traverse
+ * \param int len: size of the array
+ * \param int order: [1] indicate UP - [0] indicate DOWN
+ *
+ * return int: return (-1) uf error or  (0) or OK
+ * */
+int sortEmployees (Employee list[], int len, int order);
+
+
+/* \brief print the content of employees array
+ *
+ * \param Employee list[]: array to traverse
+ * \param int length: size of the array
+ *
+ * return int
+ * */
+int printEmployees(Employee list[], int length);
 
 /*brief: Recibe un array y lo recorre
  *
@@ -70,4 +93,14 @@ int buscarLibre(Employee list[], int tam);
  * return int: el id generado
  * */
 int generateId(void);
+
+/*/brief imprime un menu ingresado por el usuario y devuelve la opcion seleccionada
+ *
+ * param char opciones[]: lista de opciones
+ *
+ * return Retorna opcion seleccionada o -1 si error
+ * */
+int printMenu (char opciones []);
+
+int askForInt (char texto []);
 
