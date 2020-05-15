@@ -3,7 +3,7 @@
 #include <string.h>
 #include "UserInteractions.h"
 
-#define MAXEMPLOYEE 2
+
 #define EMPTY 1
 #define NOTEMPTY 0
 
@@ -65,7 +65,7 @@ int removeEmployee(Employee list [], int len, int id);
  * \param int len: size of the array
  * \param int order: [1] indicate UP - [0] indicate DOWN
  *
- * return int: return (-1) uf error or  (0) or OK
+ * return int: return (-1) if error or  (0) or OK
  * */
 int sortEmployees (Employee list[], int len, int order);
 
@@ -79,6 +79,13 @@ int sortEmployees (Employee list[], int len, int order);
  * */
 int printEmployees(Employee list[], int length);
 
+/* \brief print the content of one employee
+ *
+ * \param Employee unEmpleado: Employee to print
+ *
+ * */
+void printOneEmployee(Employee unEmpleado);
+
 /*brief: Recibe un array y lo recorre
  *
  *param Employee list[]: array a recorrer
@@ -86,7 +93,23 @@ int printEmployees(Employee list[], int length);
  *
  *return int: si encuentra un elemento vacio, devuelve el indice. Si no, devuelve -1.
  */
+
+float calcularTotalSalarios (Employee list[], int len);
+
+float calcularPromedioSalarios (Employee list[], int len);
+
+int calcularEmpleadosQueSuperanPromedio  (Employee list[], int len, float promedioSalarios);
+
 int buscarLibre(Employee list[], int tam);
+
+/*brief: Recibe un array y lo recorre
+ *
+ *param Employee list[]: array a recorrer
+ *param int tam: tamaño del array a recorrer
+ *
+ *return int: si encuentra un elemento ocupado, devuelve (0). Si no, devuelve -1.
+ */
+int buscarOcupado(Employee list[], int tam);
 
 /* \brief generador de ID ascendente, empezando desde 1
  *
@@ -94,13 +117,7 @@ int buscarLibre(Employee list[], int tam);
  * */
 int generateId(void);
 
-/*/brief imprime un menu ingresado por el usuario y devuelve la opcion seleccionada
- *
- * param char opciones[]: lista de opciones
- *
- * return Retorna opcion seleccionada o -1 si error
- * */
-int printMenu (char opciones []);
+
 
 int askForInt (char texto []);
 

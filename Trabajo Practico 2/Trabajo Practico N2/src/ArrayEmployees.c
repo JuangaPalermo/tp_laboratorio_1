@@ -48,8 +48,6 @@ int newEmployee (Employee list[], int len)
 int addEmployees(Employee list[], int len, int id, char name[], char lastName[], float salary, int sector)
 {
 	Employee newEmployee;
-	//crear funcion generate ID, porque si lo dejo asi, si da de baja un usuario le va a
-	//asignar el mismo id que tenia una persona antes
 	newEmployee.id = generateId();
 	strcpy(newEmployee.name, name);
 	strcpy(newEmployee.lastName, lastName);
@@ -71,7 +69,7 @@ int findEmployeeById(Employee list[], int len, int id)
 
 	for (i=0; i<len; i++)
 	{
-		if(id == list[i].id)
+		if(id == list[i].id && list[i].isEmpty == NOTEMPTY)
 		{
 			returnValue = i;
 			break;
@@ -100,7 +98,7 @@ int modifyEmployee(Employee list[], int len, int id)
 	{
 		do
 		{
-			opcion = printMenu("1. Modificar nombre\n2. Modificar apellido\n3. Modificar salario\n4. Modificar Sector\n5. Cancelar modificaciones\n6. Guardar cambios\n7. Salir");
+			opcion = printMenu("1. Modificar nombre\n2. Modificar apellido\n3. Modificar salario\n4. Modificar sector\n5. Previsualizar cambios\n6. Cancelar modificaciones\n7. Guardar cambios\n8. Salir", 8);
 
 			switch(opcion)
 			{
@@ -118,18 +116,24 @@ int modifyEmployee(Employee list[], int len, int id)
 				scanf("%d", &auxEmployee.sector);
 				break;
 			case 5:
+				printf("Previsualizacion de cambios (1er fila = sin cambios | 2da fila = cambios aplicados):\n");
+				printf("%4s | %40s | %40s | %15s | %10s |\n","ID", "NOMBRE", "APELLIDO", "SALARIO", "SECTOR");
+				printOneEmployee(list[indexFound]);
+				printOneEmployee(auxEmployee);
+				break;
+			case 6:
 				printf("Se han cancelado las modificaciones! \n");
 				auxEmployee = list[indexFound];
 				returnValue = 1;
 				break;
-			case 6:
+			case 7:
 				printf("Se han guardado las modificaciones! \n");
 				list[indexFound] = auxEmployee;
 				returnValue = 0;
 				break;
 			}
 
-		}while (opcion != 7);
+		}while (opcion != 8);
 
 	}
 	else
@@ -145,13 +149,24 @@ int removeEmployee(Employee list [], int len, int id)
 {
 	int returnValue;
 	int indexFound;
+	char confirmacion;
 
 	indexFound = findEmployeeById(list, len, id);
 
-	if(indexFound != -1 && list[indexFound].isEmpty == NOTEMPTY && id == list[indexFound].id)
+	if(indexFound != -1)
 	{
-		list[indexFound].isEmpty == EMPTY;
-		returnValue = 0;
+		printf("Usted selecciono al empleado %s %s, ID %d\n", list[indexFound].name, list[indexFound].lastName, list[indexFound].id);
+		confirmacion = getChar("Desea realmente eliminar al empleado? [s/n]: ", "Error, caracter invalido. Reingrese [s/n]: ", 's', 'n');
+
+		if (confirmacion == 's')
+		{
+			list[indexFound].isEmpty = EMPTY;
+			returnValue = 0;
+		}
+		else
+		{
+			returnValue = 1;
+		}
 	}
 	else
 	{
@@ -165,14 +180,151 @@ int removeEmployee(Employee list [], int len, int id)
 
 int sortEmployees (Employee list[], int len, int order)
 {
+	int i;
+	int j;
+	Employee auxEmployee;
+	int listado;
+
+	if (order == 0) //descendente
+	{
+		for(i=0; i<len-1; i++)
+		{
+			for(j=i+1; j<len; j++)
+			{
+				if(strcmp(list[i].lastName, list[j].lastName)<0)
+				{
+					auxEmployee = list[i];
+					list[i] = list [j];
+					list[j] = auxEmployee;
+				}
+				else
+				{
+					if(strcmp(list[i].lastName, list[j].lastName)==0)
+					{
+						if(list[i].salary < list[j].salary)
+						{
+							auxEmployee = list[i];
+							list[i] = list [j];
+							list[j] = auxEmployee;
+						}
+					}
+				}
+			}
+		}
+	}
+	else //ascendente
+	{
+		for(i=0; i<len-1; i++)
+		{
+			for(j=i+1; j<len; j++)
+			{
+				if(strcmp(list[i].lastName, list[j].lastName)>0)
+				{
+					auxEmployee = list[i];
+					list[i] = list [j];
+					list[j] = auxEmployee;
+				}
+				else
+				{
+					if(strcmp(list[i].lastName, list[j].lastName)==0)
+					{
+						if(list[i].salary > list[j].salary)
+						{
+							auxEmployee = list[i];
+							list[i] = list [j];
+							list[j] = auxEmployee;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	listado = printEmployees(list, len);
+
 	return 0;
 }
 
 int printEmployees(Employee list[], int length)
 {
+	int i;
+
+	printf("%4s | %40s | %40s | %15s | %10s |\n","ID", "NOMBRE", "APELLIDO", "SALARIO", "SECTOR");
+	for (i=0; i<length; i++)
+	{
+		if(list[i].isEmpty == NOTEMPTY)
+		{
+			printf("%4d | %40s | %40s | %15f | %10d |\n", list[i].id, list[i].name, list[i].lastName, list[i].salary, list[i].sector);
+		}
+	}
 	return 0;
 }
 
+void printOneEmployee(Employee unEmpleado)
+{
+	printf("%4d | %40s | %40s | %15f | %10d |\n", unEmpleado.id, unEmpleado.name, unEmpleado.lastName, unEmpleado.salary, unEmpleado.sector);
+}
+
+float calcularTotalSalarios (Employee list[], int len)
+{
+	float totalSalarios;
+	int i;
+
+	totalSalarios = 0;
+
+	for(i=0; i<len; i++)
+	{
+		if(list[i].isEmpty == NOTEMPTY)
+		{
+			totalSalarios += list[i].salary;
+		}
+	}
+
+
+	return totalSalarios;
+}
+
+float calcularPromedioSalarios (Employee list[], int len)
+{
+	float promedioSalarios;
+	int contadorEmpleados;
+	float acumuladorSalarios;
+	int i;
+
+	contadorEmpleados = 0;
+	acumuladorSalarios = 0;
+
+	for(i=0; i<len; i++)
+	{
+		if(list[i].isEmpty == NOTEMPTY)
+		{
+			contadorEmpleados++;
+			acumuladorSalarios += list[i].salary;
+		}
+	}
+
+	promedioSalarios = (float) acumuladorSalarios / contadorEmpleados;
+
+	return promedioSalarios;
+}
+
+int calcularEmpleadosQueSuperanPromedio  (Employee list[], int len, float promedioSalarios)
+{
+	int i;
+	int contadorSuperadores;
+
+	contadorSuperadores = 0;
+
+	for (i=0; i<len; i++)
+	{
+		if (list[i].isEmpty == NOTEMPTY && list[i].salary > promedioSalarios)
+		{
+			contadorSuperadores++;
+		}
+	}
+
+	return contadorSuperadores;
+}
 
 int buscarLibre(Employee list[], int tam)
 {
@@ -189,6 +341,25 @@ int buscarLibre(Employee list[], int tam)
     return index;
 }
 
+int buscarOcupado(Employee list[], int tam)
+{
+	int i;
+	int returnValue;
+
+	returnValue = -1;
+
+	for(i=0; i<tam; i++)
+	{
+		if(list[i].isEmpty == NOTEMPTY)
+		{
+			returnValue = 0;
+			break;
+		}
+	}
+
+	return returnValue;
+}
+
 int generateId(void)
 {
 	static int generatedId = 0;
@@ -198,16 +369,7 @@ int generateId(void)
 	return generatedId;
 }
 
-int printMenu (char opciones [])
-{
-	int returnValue;
 
-	printf("%s\n", opciones);
-	printf("Ingrese la opcion que desee: ");
-	scanf("%d", &returnValue);
-
-	return returnValue;
-}
 
 int askForInt (char texto [])
 {

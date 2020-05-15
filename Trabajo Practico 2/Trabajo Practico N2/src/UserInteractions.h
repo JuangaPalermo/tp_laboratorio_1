@@ -2,6 +2,14 @@
 #include <stdio_ext.h>
 #include <string.h>
 
+/*/brief imprime un menu ingresado por el usuario y devuelve la opcion seleccionada
+ *
+ * param char opciones[]: lista de opciones
+ *
+ * return Retorna opcion seleccionada o -1 si error
+ * */
+int printMenu (char opciones [], int cantidadOpciones);
+
 /*brief: pide al usuario que ingrese un entero, lo valida, y lo devuelve
  *
  *param char mensaje[]: Mensaje al usuario pidiendole el int
@@ -32,3 +40,5 @@ float getPromedio(int primerValor, int segundoValor);
 void getString (char mensaje[], char texto[], int largo);
 
 float getFloat(char mensaje[], char error[]);
+
+char getChar (char mensaje[], char error[], char letraUno, char letraDos);

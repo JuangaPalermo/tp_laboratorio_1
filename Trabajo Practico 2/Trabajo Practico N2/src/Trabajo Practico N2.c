@@ -2,20 +2,26 @@
 #include <stdlib.h>
 #include "ArrayEmployees.h"
 
+#define MAXEMPLOYEE 5
+
 int main(void) {
 
-	Employee listEmployees[MAXEMPLOYEE] = {{1,"a","a",1.1,1, 0}, {2,"b","b", 2.2,2,0}}; //defino un array de empleados, con 1000 maximo.
+	Employee listEmployees[MAXEMPLOYEE]; //= {{1,"a","a",1.1,1, 0}, {2,"b","b", 2.2,2,0}}; //defino un array de empleados, con 1000 maximo.
 
 	int opcion;
+	int opcionInformes;
 	int retornoFuncion;
-	int i;
 	int IdSeleccionado;
+	float totalSalarios;
+	float promedioSalarios;
+	int superanElPromedio;
 
-	//initEmployees(listEmployees, MAXEMPLOYEE);
+
+	initEmployees(listEmployees, MAXEMPLOYEE);
 
 	do
 	{
-		opcion = printMenu("1. Cargar un empleado\n2. Modificar un empleado\n3. Dar de baja un empleado\n4. Listar empleados\n5. Salir");
+		opcion = printMenu("1. Cargar un empleado\n2. Modificar un empleado\n3. Dar de baja un empleado\n4. Informes\n5. Salir", 5);
 
 		switch(opcion)
 		{
@@ -30,44 +36,95 @@ int main(void) {
 				printf("No hay espacio disponible para agregar a este empleado\n");
 				break;
 			}
-
 			break;
 		case 2:
 			//funcion para modificar empleados
-			IdSeleccionado = askForInt("Ingrese el ID que desea: ");
-			retornoFuncion = modifyEmployee(listEmployees, MAXEMPLOYEE, IdSeleccionado);
-			switch (retornoFuncion)
+			retornoFuncion = buscarOcupado(listEmployees, MAXEMPLOYEE);
+			if(retornoFuncion != -1)
 			{
-			case 1:
-				printf("No se han guardado las modificaciones.\n");
-				break;
-			case 0:
-				printf("Las modificaciones se han guardado correctamente.\n");
-				break;
-			case -1:
-				printf("No hay ningun empleado activo con ese numero de ID.\n");
-				break;
+				retornoFuncion = printEmployees(listEmployees, MAXEMPLOYEE);
+				IdSeleccionado = askForInt("Ingrese el ID que desea: ");
+				retornoFuncion = modifyEmployee(listEmployees, MAXEMPLOYEE, IdSeleccionado);
+				switch (retornoFuncion)
+				{
+				case 1:
+					printf("No se han guardado las modificaciones.\n");
+					break;
+				case 0:
+					printf("Las modificaciones se han guardado correctamente.\n");
+					break;
+				case -1:
+					printf("No hay ningun empleado activo con ese numero de ID.\n");
+					break;
+				}
+			}
+			else
+			{
+				printf("Aun no hay ningun empleado cargado, no puede ejecutar esta opcion.\n");
 			}
 			break;
 		case 3:
-			//funcion para dar de baja empleados
+			retornoFuncion = buscarOcupado(listEmployees, MAXEMPLOYEE);
+			if(retornoFuncion != -1)
+			{
+				retornoFuncion = printEmployees(listEmployees, MAXEMPLOYEE);
+				IdSeleccionado = askForInt("Ingrese el ID que desea: ");
+				retornoFuncion = removeEmployee(listEmployees, MAXEMPLOYEE, IdSeleccionado);
+				switch(retornoFuncion)
+				{
+				case 1:
+					printf("Usted ha cancelado la eliminacion del empleado.\n");
+					break;
+				case 0:
+					printf("Usted ha eliminado al empleado correctamente.\n");
+					break;
+				case -1:
+					printf("No hay ningun empleado para eliminar con ese ID.\n");
+					break;
+				}
+			}
+			else
+			{
+				printf("Aun no hay ningun empleado cargado, no puede ejecutar esta opcion.\n");
+			}
 			break;
 		case 4:
 			//ordenamiento de empleados
-			for (i=0;i<MAXEMPLOYEE; i++)
+			retornoFuncion = buscarOcupado(listEmployees, MAXEMPLOYEE);
+			if(retornoFuncion != -1)
 			{
-				printf("%8d - %51s - %51s - %10f - %8d - %8d\n", listEmployees[i].id, listEmployees[i].name, listEmployees[i].lastName, listEmployees[i].salary, listEmployees[i].sector, listEmployees[i].isEmpty);
+				do
+				{
+					opcionInformes = printMenu("1. Listado de empleados\n2. Informe salarial\n3. Salir de informes", 3);
+					switch (opcionInformes)
+					{
+					case 1:
+						retornoFuncion = getInt("Se ordenaraon por Apellido y Sector. Ingrese [1] para ascendente y [0] para descendente: ", "Error, parametro no valido. Ingrese [1] para ascendente y [0] para descendente: ", 0,1);
+						retornoFuncion = sortEmployees(listEmployees, MAXEMPLOYEE, retornoFuncion);
+						break;
+					case 2:
+						totalSalarios = calcularTotalSalarios(listEmployees, MAXEMPLOYEE);
+						printf("El total de los salarios es: %f\n", totalSalarios);
+						promedioSalarios = calcularPromedioSalarios(listEmployees, MAXEMPLOYEE);
+						printf("El promedio de los salarios es: %f\n", promedioSalarios);
+						superanElPromedio = calcularEmpleadosQueSuperanPromedio(listEmployees, MAXEMPLOYEE, promedioSalarios);
+						printf("La cantidad de empleados que superan el promedio de salarios es: %d\n", superanElPromedio);
+						break;
+					}
+				}while(opcionInformes != 3);
+			}
+			else
+			{
+				printf("Aun no hay ningun empleado cargado, no puede ejecutar esta opcion.\n");
 			}
 			break;
 		case 5:
-			//mensaje de salida
+			printf("\n\n---------------Gracias por utilizar el progama. Hasta la proxima.---------------\n\n");
 			break;
-		//default:
-			//verificacion de que haya ingresado una opcion correcta.
 		}
 
 	}while (opcion != 5);
-	//necesito un menu con: Alta, Baja, Modif, Listar
+
 
 
 	return EXIT_SUCCESS;
