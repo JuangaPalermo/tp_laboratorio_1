@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdio_ext.h>
 #include <string.h>
-#include "getDatos.h"
+#include "UserInteractions.h"
 
 #define MAXEMPLOYEE 2
 #define EMPTY 1

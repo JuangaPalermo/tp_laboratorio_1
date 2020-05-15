@@ -1,4 +1,4 @@
-#include "getDatos.h"
+#include "UserInteractions.h"
 
 
 int getInt (char mensaje[], char error[], int min, int max)
@@ -44,6 +44,3 @@ float getFloat(char mensaje[], char error[])
 
 	return returnValue;
 }
-
-
-
