@@ -29,7 +29,7 @@ int newEmployee (Employee list[], int len)
 
 		getString("Ingrese el nombre del empleado: ", name, 51);
 		getString("Ingrese el apellido del empleado: ", lastName, 51);
-		salary = getFloat("Ingrede el sueldo del empleado: ", "Ingreso un criterio no valido, reingrese: ");
+		salary = getFloat("Ingrede el sueldo del empleado: ");
 		printf("Ingrese el numero de sector del empleado: ");
 		scanf("%d", &sector);
 		id = index;
@@ -109,7 +109,7 @@ int modifyEmployee(Employee list[], int len, int id)
 				getString("Ingrese nuevo apellido: ", auxEmployee.lastName, 51);
 				break;
 			case 3:
-				auxEmployee.salary = getFloat("Ingrese nuevo salario: ", "Ingreso un criterio no valido, reingrese: ");
+				auxEmployee.salary = getFloat("Ingrese nuevo salario: ");
 				break;
 			case 4:
 				printf("Ingrese nuevo sector: ");
@@ -245,6 +245,7 @@ int sortEmployees (Employee list[], int len, int order)
 	return 0;
 }
 
+
 int printEmployees(Employee list[], int length)
 {
 	int i;
@@ -371,12 +372,3 @@ int generateId(void)
 
 
 
-int askForInt (char texto [])
-{
-	int returnValue;
-
-	printf("%s", texto);
-	scanf("%d", &returnValue);
-
-	return returnValue;
-}

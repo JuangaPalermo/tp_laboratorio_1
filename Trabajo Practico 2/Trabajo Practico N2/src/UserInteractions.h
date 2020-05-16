@@ -1,16 +1,21 @@
 #include <stdio.h>
 #include <stdio_ext.h>
 #include <string.h>
+#include <ctype.h>
 
 /*/brief imprime un menu ingresado por el usuario y devuelve la opcion seleccionada
+ * 		 si el usuario ingresa un numero que supera la cantidad de opciones, pide nuevamente
+ * 		 que ingrese una opcion correcta
  *
  * param char opciones[]: lista de opciones
+ * param int cantidadOpciones: cantidad de opciones dentro del menu.
  *
  * return Retorna opcion seleccionada o -1 si error
  * */
 int printMenu (char opciones [], int cantidadOpciones);
 
-/*brief: pide al usuario que ingrese un entero, lo valida, y lo devuelve
+
+/*brief: pide al usuario que ingrese un entero, lo valida entre dos valores, y lo devuelve
  *
  *param char mensaje[]: Mensaje al usuario pidiendole el int
  *param char error[]: Mensaje de error si el int no cumple los criterios de max/min
@@ -21,6 +26,7 @@ int printMenu (char opciones [], int cantidadOpciones);
  */
 int getInt (char mensaje[], char error[], int min, int max);
 
+
 /*brief: recibe dos numeros y devuelve el promedio entre ambos
  *
  *param int primervalor: primer numero a sumar para calcular el promedio
@@ -29,6 +35,7 @@ int getInt (char mensaje[], char error[], int min, int max);
  *return: float obtenido de dividir la suma de los dos numeros
  */
 float getPromedio(int primerValor, int segundoValor);
+
 
 /*brief: pide un string y lo carga en la direccion indicada
  *
@@ -39,6 +46,32 @@ float getPromedio(int primerValor, int segundoValor);
  */
 void getString (char mensaje[], char texto[], int largo);
 
-float getFloat(char mensaje[], char error[]);
 
+/*brief: le pide al usuario que ingrese un float y lo devuelve
+ *
+ *param char mensaje[]: mensaje al usuario pidiendole el float
+ *
+ *return Retorna el numero ingresado por el usuario.
+ * */
+float getFloat(char mensaje[]);
+
+
+/*brief: le pide al usuario que ingrese un char, y lo valida entre los dos char pasados como
+ * 	 	 parametro en la funcion. Si hay un error, se lo pide nuevamente hasta que ingrese un
+ * 	 	 caracter valido.
+ *
+ *param char mensaje[]: Mensaje al usuario pidiendole el char
+ *param char error[]: mensaje de error en caso de que ingrese un caracter no valido
+ *param char letraUno: primer letra para validar
+ *param char letraDos: segunda letra para validar
+ *
+ *return retorna el char validado
+ * */
 char getChar (char mensaje[], char error[], char letraUno, char letraDos);
+
+
+/*brief: le pide al usuario que ingrese un int y lo retorna
+ *
+ * return Retorna el int ingresado por el usuario
+ * */
+int askForInt (char texto []);

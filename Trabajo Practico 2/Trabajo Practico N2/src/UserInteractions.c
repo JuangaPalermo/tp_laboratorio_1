@@ -48,7 +48,7 @@ void getString (char mensaje[], char texto[], int largo)
     texto[strlen(texto)-1]='\0';
 }
 
-float getFloat(char mensaje[], char error[])
+float getFloat(char mensaje[])
 {
 	float returnValue;
 	float numeroCargado;
@@ -81,3 +81,14 @@ char getChar (char mensaje[], char error[], char letraUno, char letraDos)
 
     return returnValue;
 }
+
+int askForInt (char texto [])
+{
+	int returnValue;
+
+	printf("%s", texto);
+	scanf("%d", &returnValue);
+
+	return returnValue;
+}
+

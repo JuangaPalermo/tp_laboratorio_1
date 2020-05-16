@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "ArrayEmployees.h"
 
-#define MAXEMPLOYEE 5
+#define MAXEMPLOYEE 1000
 
 int main(void) {
 
-	Employee listEmployees[MAXEMPLOYEE]; //= {{1,"a","a",1.1,1, 0}, {2,"b","b", 2.2,2,0}}; //defino un array de empleados, con 1000 maximo.
+	Employee listEmployees[MAXEMPLOYEE];
 
 	int opcion;
 	int opcionInformes;
@@ -26,6 +26,7 @@ int main(void) {
 		switch(opcion)
 		{
 		case 1:
+			//cargar un nuevo usuario
 			retornoFuncion = newEmployee(listEmployees, MAXEMPLOYEE);
 			switch(retornoFuncion)
 			{
@@ -38,7 +39,7 @@ int main(void) {
 			}
 			break;
 		case 2:
-			//funcion para modificar empleados
+			//modificar empleados
 			retornoFuncion = buscarOcupado(listEmployees, MAXEMPLOYEE);
 			if(retornoFuncion != -1)
 			{
@@ -64,6 +65,7 @@ int main(void) {
 			}
 			break;
 		case 3:
+			//eliminacion de empleados
 			retornoFuncion = buscarOcupado(listEmployees, MAXEMPLOYEE);
 			if(retornoFuncion != -1)
 			{
@@ -89,7 +91,7 @@ int main(void) {
 			}
 			break;
 		case 4:
-			//ordenamiento de empleados
+			//reportes
 			retornoFuncion = buscarOcupado(listEmployees, MAXEMPLOYEE);
 			if(retornoFuncion != -1)
 			{
@@ -99,7 +101,7 @@ int main(void) {
 					switch (opcionInformes)
 					{
 					case 1:
-						retornoFuncion = getInt("Se ordenaraon por Apellido y Sector. Ingrese [1] para ascendente y [0] para descendente: ", "Error, parametro no valido. Ingrese [1] para ascendente y [0] para descendente: ", 0,1);
+						retornoFuncion = getInt("Se ordenaran por Apellido y Sector. Ingrese [1] para ascendente y [0] para descendente: ", "Error, parametro no valido. Ingrese [1] para ascendente y [0] para descendente: ", 0,1);
 						retornoFuncion = sortEmployees(listEmployees, MAXEMPLOYEE, retornoFuncion);
 						break;
 					case 2:
@@ -124,7 +126,6 @@ int main(void) {
 		}
 
 	}while (opcion != 5);
-
 
 
 	return EXIT_SUCCESS;
