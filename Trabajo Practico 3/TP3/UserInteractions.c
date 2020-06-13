@@ -33,6 +33,21 @@ int getInt (char mensaje[], char error[], int min)
   return valor;
 }
 
+int intBetweenTwo(char texto[], char error[], int min, int max)
+{
+    int valor;
+
+    printf ("%s", texto);
+    scanf ("%d", &valor);
+
+    while (valor < min || valor > max)
+    {
+        printf ("%s", error);
+        scanf ("%d", &valor);
+    }
+
+  return valor;
+}
 
 float getPromedio(int primerValor, int segundoValor)
 {

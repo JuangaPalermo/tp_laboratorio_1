@@ -79,3 +79,7 @@ int askForInt (char texto []);
 
 /*Generador de IDs empezando desde 1 y aumentando en 1 cada vez que se llama*/
 int generateId (void);
+
+/*Pide un entero y lo valida entre el maximo y el minimo ingresados (incluyendolos)*/
+int intBetweenTwo(char texto[], char error[], int min, int max);
+

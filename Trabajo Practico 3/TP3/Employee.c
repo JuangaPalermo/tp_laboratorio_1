@@ -4,9 +4,9 @@
 
 Employee* employee_new()
 {
-	Employee* auxEmpoyee;
+	Employee* auxEmployee;
 
-	auxEmployee = (Employee*) malloc (sizeof(*Employee));
+	auxEmployee = (Employee*)malloc(sizeof(Employee));
 
 	return auxEmployee;
 }
@@ -133,13 +133,13 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 
 	return returnValue;
 }
-int employee_getHorasTrabajadas(Employee* this,int* horasTrabajdas)
+int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
 	int returnValue = 0;
 
 	if(this != NULL)
 	{
-		*horasTrabajdas = this->horasTrabajdas;
+		*horasTrabajadas = this->horasTrabajadas;
 		returnValue = 1;
 	}
 
@@ -159,7 +159,7 @@ int employee_CompareByName(void* e1, void* e2)
 		auxE2 = (Employee*) e2;
 	}
 
-    return strcmp(e1->nombre, e2->nombre);
+    return strcmp(auxE1->nombre, auxE2->nombre);
 }
 
 int employee_CompareById(void* e1, void* e2)
@@ -174,13 +174,13 @@ int employee_CompareById(void* e1, void* e2)
     	auxE1 = (Employee*) e1;
     	auxE2 = (Employee*) e2;
 
-    	if(e1->id > e2->id)
+    	if(auxE1->id > auxE2->id)
 		{
 			returnValue = 1;
 		}
 		else
 		{
-			if(e1->id < e2->id)
+			if(auxE1->id < auxE2->id)
 			{
 				returnValue = -1;
 			}
@@ -188,6 +188,7 @@ int employee_CompareById(void* e1, void* e2)
 			{
 				returnValue = 0;
 			}
+		}
     }
 
     return returnValue;
@@ -205,13 +206,13 @@ int employee_CompareByHoras(void* e1, void* e2)
 		auxE1 = (Employee*) e1;
 		auxE2 = (Employee*) e2;
 
-		if(e1->horasTrabajadas > e2->horasTrabajadas)
+		if(auxE1->horasTrabajadas > auxE2->horasTrabajadas)
 		{
 			returnValue = 1;
 		}
 		else
 		{
-			if(e1->horasTrabajadas < e2->horasTrabajadas)
+			if(auxE1->horasTrabajadas < auxE2->horasTrabajadas)
 			{
 				returnValue = -1;
 			}
@@ -219,6 +220,7 @@ int employee_CompareByHoras(void* e1, void* e2)
 			{
 				returnValue = 0;
 			}
+		}
 	}
 
 		return returnValue;
@@ -236,13 +238,13 @@ int employee_CompareBySueldo(void* e1, void* e2)
 		auxE1 = (Employee*) e1;
 		auxE2 = (Employee*) e2;
 
-		if(e1->sueldo > e2->sueldo)
+		if(auxE1->sueldo > auxE2->sueldo)
 		{
 			returnValue = 1;
 		}
 		else
 		{
-			if(e1->sueldo < e2->sueldo)
+			if(auxE1->sueldo < auxE2->sueldo)
 			{
 				returnValue = -1;
 			}
@@ -250,6 +252,7 @@ int employee_CompareBySueldo(void* e1, void* e2)
 			{
 				returnValue = 0;
 			}
+		}
 	}
 
 	return returnValue;
