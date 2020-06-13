@@ -1,7 +1,8 @@
+#include "LinkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "LinkedList.h"
+
 #include "Employee.h"
 #include "parser.h"
 #include "UserInteractions.h"
