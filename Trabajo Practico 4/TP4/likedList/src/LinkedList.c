@@ -117,7 +117,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     		if(nodeIndex == 0)
     		{
     			newNode->pNextNode = getNode(this, nodeIndex);
-    			// o si no: newNode->pNextNode = this->pFirstNode;
+    			// (es valido //) newNode->pNextNode = this->pFirstNode;
     			newNode->pElement = pElement;
     			this->pFirstNode = newNode;
     			this->size++;
@@ -453,11 +453,13 @@ int ll_contains(LinkedList* this, void* pElement)
     int returnAux = -1;
     int i;
     Node* auxNode;
+    int len;
 
     if(this != NULL)
     {
+    	len = ll_len(this);
 
-    	for(i=0; i<ll_len(this); i++)
+    	for(i=0; i<len; i++)
     	{
     		auxNode = getNode(this, i);
 
@@ -489,13 +491,43 @@ int ll_contains(LinkedList* this, void* pElement)
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
+    int i;
+    int len2;
+    Node* auxNode2;
+    int auxElement;
+    int contador = 0;
+
+    if(this != NULL && this2 != NULL)
+    {
+    	len2 = ll_len(this2);
+
+    	for(i=0; i<len2; i++)
+    	{
+    		auxNode2 = getNode(this2, i);
+    		auxElement = ll_contains(this, auxNode2->pElement);
+
+    		if(auxElement == 1)
+    		{
+    			contador ++;
+    		}
+    	}
+
+    	if(len2 == contador)
+    	{
+    		returnAux = 1;
+    	}
+    	else
+    	{
+    		returnAux = 0;
+    	}
+    }
 
     return returnAux;
 }
 
 /** \brief Crea y retorna una nueva lista con los elementos indicados
  *
- * \param pList LinkedList* Puntero a la lista
+ * \param this LinkedList* Puntero a la lista
  * \param from int Indice desde el cual se copian los elementos en la nueva lista
  * \param to int Indice hasta el cual se copian los elementos en la nueva lista (no incluido)
  * \return LinkedList* Retorna  (NULL) Error: si el puntero a la listas es NULL
@@ -506,6 +538,22 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
+    void* auxElement;
+    int i;
+
+    if(this != NULL && from >-1 && from<=ll_len(this) && to >= from && to<=ll_len(this))
+    {
+    	cloneArray = ll_newLinkedList();
+
+    	if(cloneArray != NULL)
+    	{
+    		for(i=from; i<=to; i++)
+    		{
+    			auxElement = ll_get(this, i);
+    			ll_add(cloneArray, auxElement);
+    		}
+    	}
+    }
 
     return cloneArray;
 }
@@ -521,6 +569,24 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
+    int i;
+    int len;
+    void* auxElement;
+
+    if(this != NULL)
+    {
+    	cloneArray = ll_newLinkedList();
+    	len = ll_len(this);
+
+    	if(cloneArray != NULL)
+    	{
+    		for(i=0; i<len; i++)
+    		{
+    			auxElement = ll_get(this, i);
+    			ll_add(cloneArray, auxElement);
+    		}
+    	}
+    }
 
     return cloneArray;
 }
@@ -536,6 +602,43 @@ LinkedList* ll_clone(LinkedList* this)
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
     int returnAux =-1;
+    int i;
+    int j;
+    int len;
+    void* auxElement;
+
+    if((order == 0 || order == 1) && this != NULL && pFunc != NULL)
+    {
+    	len = ll_len(this);
+
+    	for(i=0; i<len-1; i++)
+    	{
+    		for(j=i+1; j<len; j++)
+    		{
+    			if(order == 0)
+    			{
+    				if(ll_get(this,i) != NULL && ll_get(this,j) != NULL && pFunc(ll_get(this,i), ll_get(this,j)) < 0)
+    				{
+    					auxElement = ll_get(this,i);
+						ll_set(this,i,ll_get(this,j));
+						ll_set(this,j,auxElement);
+    				}
+
+    			}
+    			else
+    			{
+    				if(ll_get(this,i) != NULL && ll_get(this,j) != NULL && pFunc(ll_get(this,i), ll_get(this,j)) > 0)
+					{
+						auxElement = ll_get(this,i);
+						ll_set(this,i,ll_get(this,j));
+						ll_set(this,j,auxElement);
+					}
+    			}
+    		}
+    	}
+
+    	returnAux = 0;
+    }
 
     return returnAux;
 
