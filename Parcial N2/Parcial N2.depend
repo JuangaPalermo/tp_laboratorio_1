@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1593105841 source:/home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/Controller.c
+	"LinkedList.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Aerolinea.h"
+	"parser.h"
+	"UserInteractions.h"
+
+1593099992 /home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/LinkedList.h
+
+1593099990 /home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/Aerolinea.h
+
+1593099993 /home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/parser.h
+
+1593100024 /home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/UserInteractions.h
+	<stdio.h>
+	<stdio_ext.h>
+	<string.h>
+	<ctype.h>
+
+1593100117 source:/home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/LinkedList.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1593105599 source:/home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/main.c
+	"LinkedList.h"
+	<stdio.h>
+	<stdlib.h>
+	"Controller.h"
+	"Aerolinea.h"
+	"UserInteractions.h"
+
+1593105768 /home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/Controller.h
+
+1593100116 source:/home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/parser.c
+	"LinkedList.h"
+	<stdio.h>
+	<stdlib.h>
+	"Aerolinea.h"
+
+1593100116 source:/home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/UserInteractions.c
+	"UserInteractions.h"
+
+1593100168 source:/home/jpalermo/Escritorio/workspace-primercuatrimestre/Parcial N2/Aerolinea.c
+	<stdlib.h>
+	"Aerolinea.h"
+	<string.h>
+

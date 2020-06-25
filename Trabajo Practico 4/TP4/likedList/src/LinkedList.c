@@ -40,7 +40,7 @@ int ll_len(LinkedList* this)
 
     if(this != NULL)
     {
-    	returnAux = this ->size;
+    	returnAux = this->size;
     }
 
     return returnAux;
@@ -495,7 +495,6 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
     int len2;
     Node* auxNode2;
     int auxElement;
-    int contador = 0;
 
     if(this != NULL && this2 != NULL)
     {
@@ -506,20 +505,19 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
     		auxNode2 = getNode(this2, i);
     		auxElement = ll_contains(this, auxNode2->pElement);
 
-    		if(auxElement == 1)
+    		if(auxElement == 0)
     		{
-    			contador ++;
+    			returnAux = 0;
+    			break;
     		}
+
     	}
 
-    	if(len2 == contador)
+    	if(len2 == i)
     	{
     		returnAux = 1;
     	}
-    	else
-    	{
-    		returnAux = 0;
-    	}
+
     }
 
     return returnAux;
@@ -535,7 +533,7 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
                                 o (si el indice to es menor o igual a from o mayor al len de la lista)
                          (puntero a la nueva lista) Si ok
 */
-LinkedList* ll_subList(LinkedList* this,int from,int to)
+LinkedList* ll_subList(LinkedList* this,int from,int to) //revisar
 {
     LinkedList* cloneArray = NULL;
     void* auxElement;
@@ -566,7 +564,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
  * \return LinkedList* Retorna  (NULL) Error: si el puntero a la listas es NULL
                                 (puntero a la nueva lista) Si ok
 */
-LinkedList* ll_clone(LinkedList* this)
+LinkedList* ll_clone(LinkedList* this) //revisar
 {
     LinkedList* cloneArray = NULL;
     int i;
